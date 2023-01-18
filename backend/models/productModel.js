@@ -27,7 +27,7 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     category: {
-      type: Boolean,
+      type: String,
       required: true,
     },
     description: {
@@ -61,4 +61,4 @@ const productSchema = mongoose.Schema(
 
 const Product = mongoose.model("Product", productSchema);
 
-export default User;
+export default Product;

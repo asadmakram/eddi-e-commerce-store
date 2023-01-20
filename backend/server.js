@@ -1,24 +1,25 @@
-import express from "express"
-import products  from "./data/products.js"
-import env from 'dotenv'
+import express from "express";
+import env from "dotenv";
+import connectDB from "./config/db.js";
+import productRouter from "./routes/productRoutes.js";
 
-import connectDB from './config/db.js'
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
-env.config()
+env.config();
+
 connectDB();
+
 const app = express();
+
 app.get("/", (req, res) => {
   res.send("Api is running..");
 });
 
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
+app.use("/api/products", productRouter);
 
-app.get("/api/products/:id", (req, res) => {
-  const product = products.find((product) => product._id === req.params.id);
-  res.json(product);
-});
+app.use(notFound);
+
+app.use(errorHandler);
 
 const port = process.env.PORT || 5100;
 app.listen(port, (req, res) => {

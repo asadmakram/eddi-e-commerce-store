@@ -23,11 +23,6 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     }
     case CART_REMOVE_ITEM: {
       const id = item;
-      console.log("my id", id);
-      console.trace();
-      // console.log(state)
-      console.log(state.cartItems);
-      console.log(state.cartItems.filter((x) => x.product !== id));
       return {
         ...state,
         cartItems: state.cartItems.filter((x) => x.product !== id),
